@@ -1,0 +1,24 @@
+{
+	"name": "playtomic-alerts",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev --test-scheduled",
+		"start": "wrangler dev --test-scheduled",
+		"cf-typegen": "wrangler types",
+		"generate": "drizzle-kit generate",
+		"migrate-local": "wrangler d1 migrations apply \"playtomic-d1\"",
+		"migrate-remote": "wrangler d1 migrations apply \"playtomic-d1\" --remote",
+		"studio": "drizzle-kit studio --config=drizzle-dev.config.ts"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250426.0",
+		"drizzle-kit": "^0.31.0",
+		"typescript": "^5.5.2",
+		"wrangler": "^4.13.2"
+	},
+	"dependencies": {
+		"drizzle-orm": "^0.43.1"
+	}
+}
