@@ -8,9 +8,11 @@ import { sendSlackMessage } from '../lib/slack';
 // Array of tournament name keyword groups to filter by (case insensitive)
 // A tournament name must contain ALL keywords within ANY of these groups
 const TOURNAMENT_NAME_KEYWORD_GROUPS = [
+  ["Americano", "początkujących"],  // Must contain both "Americano" AND "dla"
   ["Americano", "C2"],  // Must contain both "Americano" AND "C2"
   ["Mexicano", "C1"],   // Must contain both "Mexicano" AND "C1"
-  ["Król kortu"]         // Must contain "Król kortu"
+  ["Mexicano", "początkujących"],   // Must contain both "Mexicano" AND "początkujących"
+  ["Król", "kortu"]         // Must contain "Król kortu"
 ];
 
 export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
@@ -47,7 +49,7 @@ export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
             
             if (filteredTournaments.length > 0) {
                 await step.do('send slack message', async () => {
-                    await sendSlackMessage(`New tournaments available: ${filteredTournaments.map(t => t.name).join(', ')}`);
+                    await sendSlackMessage(`Playtomic: ${filteredTournaments.map(t => t.name).join(', ')}`);
                 });
             }
         }
