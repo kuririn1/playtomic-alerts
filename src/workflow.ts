@@ -12,7 +12,8 @@ const TOURNAMENT_NAME_KEYWORD_GROUPS = [
   ["Americano", "C2"],  // Must contain both "Americano" AND "C2"
   ["Mexicano", "C1"],   // Must contain both "Mexicano" AND "C1"
   ["Mexicano", "początkujących"],   // Must contain both "Mexicano" AND "początkujących"
-  ["Król", "kortu"]         // Must contain "Król kortu"
+  ["Król", "kortu"],         // Must contain "Król kortu"
+  ["Akademia"],
 ];
 
 export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
