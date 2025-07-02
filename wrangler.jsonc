@@ -29,6 +29,9 @@
 		"crons": [
 			"* 6-21 * * *"
 		]
+	},
+	"vars": {
+		"EMAIL_FROM": "form@resend.dev"
 	}
 	/**
 	 * Smart Placement

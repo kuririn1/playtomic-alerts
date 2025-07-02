@@ -4,6 +4,7 @@ import { drizzle } from 'drizzle-orm/d1';
 import { eq } from 'drizzle-orm';
 import { lastTournaments } from '../db/schema';
 import { sendSlackMessage } from '../lib/slack';
+import { sendEmailNotification } from '../lib/email';
 
 // Array of tournament name keyword groups to filter by (case insensitive)
 // A tournament name must contain ALL keywords within ANY of these groups
@@ -55,6 +56,12 @@ export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
                 await step.do('send slack message', async () => {
                     await sendSlackMessage(`Playtomic: ${filteredTournaments.map(t => t.name).join(', ')}`);
                 });
+
+				for (const tournament of filteredTournaments) {
+					await step.do(`send email for ${tournament.name}`, async () => {
+						await sendEmailNotification(tournament);
+					});
+				}
             }
         }
     });
