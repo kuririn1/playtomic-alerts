@@ -35,6 +35,7 @@ export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
     });
 
     await step.do('compare tournaments', async () => {
+
         if (prevTournaments) {
             // Find new tournaments (those not in previous tournaments list)
             const newTournaments = tournaments.filter(t => !prevTournaments.some(pt => pt.tournament_id === t.tournament_id));
