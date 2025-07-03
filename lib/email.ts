@@ -22,7 +22,7 @@ export async function sendEmailNotification(tournament: Tournament) {
 	try {
 		const { data, error } = await resend.emails.send({
 			from: `Playtomic Alerts <${env.EMAIL_FROM}>`,
-			to: [env.EMAIL, env.EMAIL_2],
+			to: [env.EMAIL],
 			subject: subject,
 			text: `${tournament.available_places} wolnych miejsc`,
 		});
