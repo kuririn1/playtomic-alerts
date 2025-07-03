@@ -54,8 +54,11 @@ export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
             });
             
             if (filteredTournaments.length > 0) {
+
+                const tournamentLinkPrefix = 'https://playtomic.io/tournaments/';
+
                 await step.do('send slack message', async () => {
-                    await sendSlackMessage(`Playtomic: ${filteredTournaments.map(t => t.name).join(', ')}`);
+                    await sendSlackMessage(`Playtomic: ${filteredTournaments.map(t => `${t.name} - <${tournamentLinkPrefix}${t.tournament_id}|ZAPISZ SIĘ>`).join(', ')}`);
                 });
 
 				for (const tournament of filteredTournaments) {

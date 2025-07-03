@@ -18,13 +18,14 @@ function formatStartDate(startDate: string): string {
 export async function sendEmailNotification(tournament: Tournament) {
 	const resend = new Resend(env.RESEND_TOKEN);
 	const subject = `🎾 ${tournament.name} - ${formatStartDate(tournament.start_date)}`;
+    const tournamentLinkPrefix = 'https://playtomic.io/tournaments';
 
 	try {
 		const { data, error } = await resend.emails.send({
 			from: `Playtomic Alerts <${env.EMAIL_FROM}>`,
-			to: [env.EMAIL],
+			to: [env.EMAIL, env.EMAIL_2],
 			subject: subject,
-			text: `${tournament.available_places} wolnych miejsc`,
+			text: `${tournament.available_places} wolnych miejsc\n\n${tournamentLinkPrefix}/${tournament.tournament_id}`,
 		});
 
 		if (error) {
