@@ -8,6 +8,8 @@ export default {
 		return new Response(`To test the scheduled handler, ensure you have used the "--test-scheduled" then try running "curl ${url.href}".`);
 	},
 	async scheduled(event, env, ctx): Promise<void> {
-		await env.WORKFLOW.create();
+		ctx.waitUntil(env.WORKFLOW.create());
+		await new Promise(resolve => setTimeout(resolve, 30 * 1000));
+		ctx.waitUntil(env.WORKFLOW.create());
 	},
 } satisfies ExportedHandler<Env>;
