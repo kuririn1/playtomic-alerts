@@ -9,7 +9,12 @@ export default {
 	},
 	async scheduled(event, env, ctx): Promise<void> {
 		ctx.waitUntil(env.WORKFLOW.create());
-		await new Promise(resolve => setTimeout(resolve, 30 * 1000));
-		ctx.waitUntil(env.WORKFLOW.create());
+
+		const today = new Date();
+		// In JavaScript's getDay(), Sunday is 0, Monday is 1, ..., and Thursday is 4.
+		if (today.getDay() === 4) {
+			await new Promise(resolve => setTimeout(resolve, 30 * 1000));
+			ctx.waitUntil(env.WORKFLOW.create());
+		}
 	},
 } satisfies ExportedHandler<Env>;
