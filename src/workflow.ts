@@ -17,7 +17,8 @@ const TOURNAMENT_NAME_KEYWORD_GROUPS = [
   ["Akademia"],
   ["Szkolenie"],
   ["Warsztaty"],
-  ["Warsztat"]
+  ["Warsztat"],
+  ["C1"]
 ];
 
 export class PlaytomicAlertsWorkflow extends WorkflowEntrypoint<Env, void> {
